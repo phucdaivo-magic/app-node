@@ -24,12 +24,14 @@ async function start() {
 		return;
 	}
 	await window.api.startWatch(scss, js, out);
-	document.querySelector("[js-end]").classList.add("show");
-	document.querySelector("[js-start]").classList.remove("show");
+	document.querySelector("[js-start]").classList.add("active");
+	document.querySelector("[js-start] svg").classList.add("active");
+	document.querySelector("[js-end]").classList.add("active");
 }
 
 async function stop() {
 	await window.api.stopWatch();
-	document.querySelector("[js-start]").classList.add("show");
-	document.querySelector("[js-end]").classList.remove("show");
+	document.querySelector("[js-start]").classList.remove("active");
+	document.querySelector("[js-start] svg").classList.remove("active");
+	document.querySelector("[js-end]").classList.remove("active");
 }
