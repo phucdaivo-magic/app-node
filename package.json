@@ -1,0 +1,52 @@
+{
+  "name": "scss-js-watcher",
+  "version": "1.0.0",
+  "description": "SCSS + JS watcher with esbuild",
+  "main": "main.js",
+  "author": "You",
+  "scripts": {
+    "start": "electron .",
+    "build:mac": "electron-builder --mac",
+    "build:win": "electron-builder --win",
+    "build:all": "electron-builder -m -w"
+  },
+  "build": {
+    "appId": "com.example.scssjswatcher",
+    "productName": "SCSS JS Watcher",
+    "files": [
+      "**/*"
+    ],
+    "directories": {
+      "buildResources": "assets",
+      "output": "release"
+    },
+    "mac": {
+      "category": "public.app-category.developer-tools",
+      "icon": "assets/icon.icns",
+      "target": [
+        "dmg",
+        "zip"
+      ]
+    },
+    "win": {
+      "icon": "assets/icon.ico",
+      "target": [
+        "nsis"
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+    }
+  },
+  "devDependencies": {
+    "electron": "^29.0.0",
+    "electron-builder": "^24.13.3"
+  },
+  "dependencies": {
+    "chokidar": "^3.5.3",
+    "esbuild": "^0.20.0",
+    "express": "^4.19.2",
+    "sass": "^1.70.0"
+  }
+}

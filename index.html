@@ -1,0 +1,64 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <title>SCSS Builder</title>
+</head>
+
+<body class="font-family:monospace background:#f4f4f4 padding:10px_30px">
+  <h2>SCSS + JS Watch Server</h2>
+
+  <p id="scss">SCSS: chưa chọn</p>
+  <p id="js">JS: chưa chọn</p>
+  <p id="out">Output: chưa chọn</p>
+  <div class="display:flex gap:20px flex-direction:column">
+    <div class="display:flex gap:10px">
+      <button
+        class="box-sizing:border-box text-transform:uppercase cursor:pointer border:0 border-radius:3px font-weight:bold background:#4096ff color:#fff height:35px padding:5px_20px display:flex justify-content:center align-items:center"
+        onclick="pickScss()">
+        Chọn SCSS
+      </button>
+      <button
+        class="box-sizing:border-box text-transform:uppercase cursor:pointer border:0 border-radius:3px font-weight:bold background:#4096ff color:#fff height:35px padding:5px_20px display:flex justify-content:center align-items:center"
+        onclick="pickJs()">
+        Chọn JS
+      </button>
+      <button
+        class="box-sizing:border-box text-transform:uppercase cursor:pointer border:0 border-radius:3px font-weight:bold background:#4096ff color:#fff height:35px padding:5px_20px display:flex justify-content:center align-items:center"
+        onclick="pickOut()">
+        Chọn Output
+      </button>
+    </div>
+
+    <div class="display:flex gap:10px">
+      <button
+        js-start
+        class="show show.display:flex display:none box-sizing:border-box text-transform:uppercase cursor:pointer border:0 border-radius:3px font-weight:bold background:#4096ff color:#fff height:35px padding:5px_20px display:flex justify-content:center align-items:center"
+        onclick="start()">
+        ▶ Start Watch
+      </button>
+      <button
+        js-end
+        class="show.display:flex display:none box-sizing:border-box text-transform:uppercase cursor:pointer border:0 border-radius:3px font-weight:bold background:#4096ff color:#fff height:35px padding:5px_20px display:flex justify-content:center align-items:center"
+        onclick="stop()">
+        ■ Stop
+      </button>
+    </div>
+    <div>
+      <div class="display:flex gap:10px flex-direction:column">
+        <a ref="_blank" class="color:#4096ff" href="http://localhost:3000/style.css">Access:
+          http://localhost:3000/style.css</a>
+        <a ref="_blank" class="color:#4096ff" href="http://localhost:3000/bundle.js">Access:
+          http://localhost:3000/bundle.js</a>
+      </div>
+    </div>
+  </div>
+
+</body>
+
+<script src="./libs/bundle.js"></script>
+<script src="renderer.js"></script>
+</body>
+
+</html>
