@@ -66,8 +66,13 @@ function startServer(outDir) {
 }
 
 /* ========= WATCH ========= */
-ipcMain.handle("start-watch", async (_, scss, js, outDir) => {
+ipcMain.handle("start-watch", async (_, scss, js, outDir, folder) => {
 	if (watcher) watcher.close();
+	const watchPaths = [scss, js];
+
+	if (folder) {
+		watchPaths.push([folder, '/**/*']);
+	}
 
 	fs.mkdirSync(outDir, { recursive: true });
 
@@ -78,16 +83,16 @@ ipcMain.handle("start-watch", async (_, scss, js, outDir) => {
 
 	startServer(outDir);
 
-	watcher = chokidar.watch([scss, js].filter(Boolean), {
+	watcher = chokidar.watch(watchPaths.filter(Boolean), {
 		ignoreInitial: true,
 	});
 
 	watcher.on("change", async (file) => {
 		try {
-			if (file === scss) {
+			if (file.split('.').pop() === 'scss') {
 				await buildScss(scss, outDir);
 			}
-			if (file === js) {
+			if (file.split('.').pop() === 'js') {
 				await buildJs(js, outDir);
 			}
 			console.log("Changed:", file);
@@ -123,6 +128,13 @@ ipcMain.handle("pick-js", async () => {
 });
 
 ipcMain.handle("pick-output", async () => {
+	const { canceled, filePaths } = await dialog.showOpenDialog({
+		properties: ["openDirectory"],
+	});
+	return canceled ? null : filePaths[0];
+});
+
+ipcMain.handle("pick-folder", async () => {
 	const { canceled, filePaths } = await dialog.showOpenDialog({
 		properties: ["openDirectory"],
 	});

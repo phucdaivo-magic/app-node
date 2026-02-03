@@ -1,6 +1,12 @@
 let scss = null;
 let js = null;
 let out = null;
+let folder = null;
+
+async function pickFolder() {
+	folder = await window.api.pickFolder();
+	document.getElementById("folder").innerText = `Folder: ${folder ?? "chưa chọn"}`;
+}
 
 async function pickScss() {
 	scss = await window.api.pickScss();
@@ -23,7 +29,7 @@ async function start() {
 		alert("Chọn đủ SCSS, JS và Output");
 		return;
 	}
-	await window.api.startWatch(scss, js, out);
+	await window.api.startWatch(scss, js, out, folder);
 	document.querySelector("[js-start]").classList.add("active");
 	document.querySelector("[js-start] svg").classList.add("active");
 	document.querySelector("[js-end]").classList.add("active");
